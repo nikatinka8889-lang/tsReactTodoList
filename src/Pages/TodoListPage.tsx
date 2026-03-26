@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Form from "../components/Form/Form";
-import Header from "../components/Header/Header";
 import ToDoList from "../components/ToDoList/ToDoList";
 import { ToDo } from "../models/todo-item";
 import { ToastContainer } from "react-toastify"
@@ -42,7 +41,6 @@ export default function TodoListPage() {
     
   return (
     <>
-    <Header/>
     <Form createNewToDo={createNewToDo}/>
     <ToDoList todos={todos}  upDateToDo={upDateToDo} deleteToDo={deleteToDo}/>
     <ToastContainer
