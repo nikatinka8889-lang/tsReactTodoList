@@ -1,10 +1,10 @@
 import React from "react";
-import "./Form.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../store";
 import { clearText, setText } from "../../features/formSlice";
-
+import {  FormBlock, FormControl, FormField, FormLabel, FormWrapper,} from "./Form.styled";
+import plusIkon from '../../assets/images/plus.png'
 export default function Form(props: { createNewToDo: (text: string) => void }) {
   const dispatch = useDispatch();
   const text = useSelector((state: RootState) => state.form.text);
@@ -19,17 +19,17 @@ export default function Form(props: { createNewToDo: (text: string) => void }) {
   };
 
   return (
-    <div className="form-wrapper">
-      <form onSubmit={formSubmit}>
-        <label>
-          <input
+    <FormWrapper>
+      <FormBlock onSubmit={formSubmit}>
+        <FormLabel>
+          <FormField
             type="text"
             value={text}
             onChange={(e) => dispatch(setText(e.target.value))}
           />
-          <button></button>
-        </label>
-      </form>
-    </div>
+          <FormControl icon={plusIkon}/>
+        </FormLabel>
+      </FormBlock>
+    </FormWrapper>
   );
 }

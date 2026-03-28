@@ -1,35 +1,44 @@
 import TodoListItem from "./ToDoListItem/TodoListItem";
-import "./ToDoList.scss";
 import { ToDo } from "../../models/todo-item";
-export default function ToDoList(props:{todos: ToDo[], upDateToDo: (todos: ToDo) => void,  deleteToDo: (todos: ToDo) => void},   ) {
+import { TodoContainer, TodoList } from "./ToDoList.styled";
+
+export default function ToDoList(props: {
+  todos: ToDo[];
+  upDateToDo: (todo: ToDo) => void;
+  deleteToDo: (todo: ToDo) => void;
+}) {
   
+  const activeTodos = props.todos
+    .filter((item) => !item.isDone)
+    .map((item) => (
+      <TodoListItem
+        toDoItem={item}
+        key={item.id}
+        upDateToDo={props.upDateToDo}
+        deleteToDo={props.deleteToDo}
+      />
+    ));
 
-
-  const chekedList = ()=>{
-    return props.todos.filter(item=> !item.isDone).map((item, index)=>{
-          return(
-            <TodoListItem toDoItem={item} key={index}   upDateToDo={props.upDateToDo} deleteToDo={props.deleteToDo}/>
-          )
-        })
-  }
-
-
-  const unChekedList = ()=>{
-    return props.todos.filter(item=> item.isDone).map((item, index)=>{
-          return(
-            <TodoListItem toDoItem={item} key={index}   upDateToDo={props.upDateToDo} deleteToDo={props.deleteToDo}/>
-          )
-        })
-  }
+  const completedTodos = props.todos
+    .filter((item) => item.isDone)
+    .map((item) => (
+      <TodoListItem
+        toDoItem={item}
+        key={item.id}
+        upDateToDo={props.upDateToDo}
+        deleteToDo={props.deleteToDo}
+      />
+    ));
 
   return (
-    <div className="todo-container">
-      <ul className="todo-list failed">
-        {chekedList()}
-      </ul>
-      <ul className="todo-list completed">
-        {unChekedList()}
-      </ul>
-    </div>
+    <TodoContainer>
+      <TodoList variant="active">
+        {activeTodos}
+      </TodoList>
+
+      <TodoList variant="completed">
+        {completedTodos}
+      </TodoList>
+    </TodoContainer>
   );
 }
