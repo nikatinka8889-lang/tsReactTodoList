@@ -6,7 +6,6 @@ import { router } from './router';
 
 import { Provider } from 'react-redux'
 import { store } from './store';
-import { GlobalStyle } from './Styles/GlobalStyle';
 
 
 
@@ -18,7 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <GlobalStyle/>
+      
     <RouterProvider router={router} />
         </Provider>
   </React.StrictMode>

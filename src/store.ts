@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from './features/todoList'
 import formReducer from './features/formSlice'
+import themeReducer from './features/themeList'
 import { loadFromLocalStorage, saveToLocalStorage } from "./healpers/storage";
 type PreloadedState = {
   todoList: ReturnType<typeof todoReducer>
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     todoList: todoReducer,
     form: formReducer,
+    themeList: themeReducer,
   },
   preloadedState,
 })
